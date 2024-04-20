@@ -1,13 +1,13 @@
 import { validateCode } from "@/validationSchema/verifyuser.valid";
 import { date, z } from "zod";
 import { PrismaClient } from "@prisma/client";
-import { NextResponse } from "next/server";
+
 
 const prisma = new PrismaClient();
 
 // User Verification Route
-export async function POST(res: NextResponse) {
-  const { username, code } = await res.json();
+export async function POST(req:Request) {
+  const { username, code } = await req.json();
 
   const codeObj = {
     code: code,

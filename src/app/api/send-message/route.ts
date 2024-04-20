@@ -3,9 +3,9 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient()
 
-export async function POST(res:Response) {
+export async function POST(req:Request) {
 
-    const {username,content} = await res.json()
+    const {username,content} = await req.json()
 
     try {
         // checking user exists or not
