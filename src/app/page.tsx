@@ -1,5 +1,3 @@
-import { sendMail } from "@/utils/email";
-
 export default function Home() {
   
   return (
