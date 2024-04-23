@@ -2,7 +2,6 @@ import bcrypt from "bcryptjs";
 import { signUpValidation } from "@/validationSchema/signup.valid";
 import { PrismaClient } from "@prisma/client";
 import { NextResponse, NextRequest } from "next/server";
-import { ApiResponse } from "@/app/types/ApiResponse";
 import { customAlphabet, nanoid } from "nanoid";
 import { sendMail } from "@/utils/email";
 
@@ -27,7 +26,7 @@ export async function POST(req: NextRequest) {
         username: username,
       },
     });
-
+    
     if (isExistByUsername) {
       return Response.json(
         {
@@ -37,20 +36,23 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-
+   
     const isExistByEmail = await prisma.user.findFirst({
       where: {
         email: email,
       },
     });
 
+    console.log(`from BE ${isExistByEmail}`);
+    
+     
     if (isExistByEmail) {
       //TODO
       if(isExistByEmail.isVerify){
         return Response.json({
             success: false,
             message:"Email is already used"
-        })
+        },{status:400})
       }else{
         await prisma.user.update({
             where:{
@@ -62,6 +64,7 @@ export async function POST(req: NextRequest) {
               verifyCodeExpiry:ExpiryDate
             },
           });
+          
       }
 
     } else {
@@ -82,7 +85,7 @@ export async function POST(req: NextRequest) {
     if (!emailResponse.success) {
       return Response.json(
         {
-          success: "false",
+          success: false,
           message: emailResponse.message,
         },
         { status: 500 }
@@ -91,7 +94,7 @@ export async function POST(req: NextRequest) {
     
     return Response.json(
       {
-        success: "Ture",
+        success: true,
         message: "user created check your email",
       },
       { status: 200 }

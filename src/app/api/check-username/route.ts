@@ -20,7 +20,7 @@ export async function GET(req:NextRequest){
         },{status:500})
     }
     const {username} = validation.data
-     console.log(username);
+     
      
     const isTaken= await prisma.user.findFirst({
         where:{
@@ -35,5 +35,5 @@ export async function GET(req:NextRequest){
     }
 
 
-    return Response.json({success:"true",message:"username is unique"})
+    return Response.json({success:true,message:"username is unique"})
 }
