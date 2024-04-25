@@ -1,18 +1,15 @@
-import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
 import { compare } from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
-import { error } from "console";
-import { Session } from "inspector";
 
 const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      id: "123",
-      name: "Bikash",
+      id: "Credentials",
+      name: "Credentials",
       credentials: {
         username: {
           label: "Email",
@@ -58,7 +55,7 @@ export const authOptions: NextAuthOptions = {
       if (token) {
         token.id = user.id;
         token.username = user.username;
-        token.isVerify = user.isVerify
+        token.isVerify = user.isVerify;
         token.email = user.email;
         token.isAcceptingMsg = user.isAcceptingMsg;
       }
@@ -67,13 +64,11 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ session, token }) {
-
       if (token) {
         session.user.id = token.id;
         session.user.email = token.email;
         session.user.isVerify = token.isVerify;
-        session.user.isAcceptingMsg = token.isAcceptingMsg
-        
+        session.user.isAcceptingMsg = token.isAcceptingMsg;
       }
 
       return session;

@@ -9,6 +9,9 @@ const prisma = new PrismaClient();
 export async function POST(req:Request) {
   const { username, code } = await req.json();
 
+  console.log(username,code);
+  
+
   const codeObj = {
     code: code,
   };
@@ -31,7 +34,7 @@ export async function POST(req:Request) {
   });
 
   if (!getUser) {
-    return Response.json({ success: false, message: "Invalid User" });
+    return Response.json({ success: false, message: "Invalid User" },{status:404});
   }
 
   const iscodeNotExpired = new Date(getUser.verifyCodeExpiry) > new Date();
