@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
      ExpiryDate.setHours(ExpiryDate.getHours() + 1);
 
     // validation
-    const isExistByUsername = await prisma.user.findFirst({
+    const isExistByUsername = await prisma.usertable.findFirst({
       where: {
         username: username,
       },
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
       );
     }
    
-    const isExistByEmail = await prisma.user.findFirst({
+    const isExistByEmail = await prisma.usertable.findFirst({
       where: {
         email: email,
       },
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
             message:"Email is already used"
         },{status:400})
       }else{
-        await prisma.user.update({
+        await prisma.usertable.update({
             where:{
              email:email
             },
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
 
     } else {
 
-      await prisma.user.create({
+      await prisma.usertable.create({
         data: {
           email: email,
           username: username,

@@ -14,7 +14,7 @@ export async function sendMail(
   try {
 
     const data = await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from:'Acme <noreplay@bikash.cloud>',
       to: email,
       subject: "Verification Mail",
       react: emailTemplate({ username, otp }),

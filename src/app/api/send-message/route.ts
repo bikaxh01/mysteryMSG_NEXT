@@ -9,7 +9,7 @@ export async function POST(req:Request) {
 
     try {
         // checking user exists or not
-      const User = await prisma.user.findFirst({
+      const User = await prisma.usertable.findFirst({
         where:{
             username:username
         }
@@ -38,7 +38,7 @@ export async function POST(req:Request) {
       });
 
 
-      const updatedUser = await prisma.user.update({
+      const updatedUser = await prisma.usertable.update({
         where: {
           id: User.id,
         },

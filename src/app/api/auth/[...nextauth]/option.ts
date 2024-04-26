@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
           const email = await credentials.identifier;
           const password = await credentials.password;
 
-          const user = await prisma.user.findFirst({
+          const user = await prisma.usertable.findFirst({
             where: {
               email: email,
             },

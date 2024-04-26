@@ -22,7 +22,7 @@ export async function GET(req:NextRequest){
     const {username} = validation.data
      
      
-    const isTaken= await prisma.user.findFirst({
+    const isTaken= await prisma.usertable.findFirst({
         where:{
             username:username,
             isVerify:true

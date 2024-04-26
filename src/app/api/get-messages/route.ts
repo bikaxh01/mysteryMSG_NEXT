@@ -7,6 +7,10 @@ const prisma = new PrismaClient();
 export async function GET(res: Response) {
   const session = await getServerSession(authOptions);
   const user = await session?.user;
+  //@ts-ignore
+  const id = parseInt(user?.id)
+   console.log(user);
+   
 
   if (!user) {
     return Response.json(
@@ -16,37 +20,32 @@ export async function GET(res: Response) {
   }
 
   try {
-    //@ts-ignore
-    const userID = 12;
 
     // geting messages
-    const user = await prisma.user.findUnique({
-        where: {
-          id: userID, 
-        },
-        include: {
-          messages: {
-            orderBy: {
-              createdAt: 'desc',
-            },
-          },
-        },
+    const isExists = await prisma.message.findMany({
+        where:{
+          userId:id
+        }
       });
-
-    if(!user){
+    
+      
+      
+    if(isExists.length == 0){
         return Response.json(
-            { success: false, message: "invalid user", data:null },
+            { success: false, message: "No Message", data:null },
             { status: 200 }
           );
     }
 
       return Response.json(
-        { success: true, message: "success", data:user?.messages },
+        { success: true, message: "success", data:isExists},
         { status: 200 }
       );
       
       
-  } catch (error) {
+  } catch (error:any) {
+    console.log(error.message);
+    
     return Response.json(
       { success: false, message: "Error while getting messsages" },
       { status: 400 }
@@ -54,9 +53,4 @@ export async function GET(res: Response) {
   }
 }
 
-// const messages = await userModel.aggregate([
-//     {$match:{id:userID}},
-//     {$unwind:"$messages"},
-// {sort:{"message.createdAt":-1}},
-// {group:{id:"_id",messages:{$push:"$messages"}}}
-// ]);
+

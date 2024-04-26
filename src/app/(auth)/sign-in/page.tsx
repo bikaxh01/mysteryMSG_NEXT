@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signInValidation } from "@/validationSchema/signIn.valid";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 function SignInForm() {
   const [isSubmittingLoader, setIsSubmmitingLoader] = useState(false);
@@ -41,7 +42,7 @@ function SignInForm() {
       identifier: data.identifier,
       password: data.password,
     });
-    console.log("res",response);
+    console.log("res", response);
 
     toast({
       title: "Success",
@@ -62,8 +63,8 @@ function SignInForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="w-full max-w-md p-8 space-y-8  border-2 rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
             Join True Feedback
@@ -104,6 +105,14 @@ function SignInForm() {
             </Button>
           </form>
         </Form>
+        <div>
+          <p>
+            Register Now{" "}
+            <Link href={"/signup"} className=" text-blue-600 underline">
+              click here
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

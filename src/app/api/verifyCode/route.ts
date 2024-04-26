@@ -27,7 +27,7 @@ export async function POST(req:Request) {
     );
   }
 
-  const getUser = await prisma.user.findFirst({
+  const getUser = await prisma.usertable.findFirst({
     where: {
       username: username,
     },
@@ -44,7 +44,7 @@ export async function POST(req:Request) {
   console.log(checkCode);
 
   if (iscodeNotExpired && checkCode) {
-    await prisma.user.update({
+    await prisma.usertable.update({
       where: {
         username: username,
       },

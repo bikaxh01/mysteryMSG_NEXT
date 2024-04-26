@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 
   try {
     //update isaccepting user message
-    const updatedUser = await prisma.user.update({
+    const updatedUser = await prisma.usertable.update({
       where: {
         id: userID,
       },
@@ -71,7 +71,7 @@ export async function GET(req:Request) {
     }
 try {
     
-        const userMessageStatus = await prisma.user.findUnique({
+        const userMessageStatus = await prisma.usertable.findUnique({
             where:{
                 id:userID
             }
