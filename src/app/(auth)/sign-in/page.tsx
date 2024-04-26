@@ -23,7 +23,6 @@ function SignInForm() {
   const { toast } = useToast();
   const router = useRouter();
 
-
   // zod validation
   const form = useForm({
     resolver: zodResolver(signInValidation),
@@ -32,33 +31,34 @@ function SignInForm() {
       identifier: "",
     },
   });
- 
+
   // handling form submit
   const onSubmit = async (data: any) => {
-    
-     setIsSubmmitingLoader(true)
-     const response = await signIn("credentials",{
-      redirect:false,
-      identifier : data.identifier,
-      password:data.password
-     })
+    setIsSubmmitingLoader(true);
 
-     console.log(`response ${response}`);
+    const response = await signIn("credentials", {
+      redirect: false,
+      identifier: data.identifier,
+      password: data.password,
+    });
+    console.log("res",response);
 
-     if(response?.error){
+    toast({
+      title: "Success",
+    });
+    if (response?.error) {
       await toast({
         title: "Error",
         description: response.error,
-        variant:"destructive"
+        variant: "destructive",
       });
-      setIsSubmmitingLoader(false)
-     }
-     console.log(response);
-     
-     if (response?.url) {
-      router.replace('/dashboard');
+      setIsSubmmitingLoader(false);
     }
-     setIsSubmmitingLoader(false)
+
+    if (response?.url) {
+      router.replace("/dashboard");
+    }
+    setIsSubmmitingLoader(false);
   };
 
   return (
@@ -93,16 +93,15 @@ function SignInForm() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Password"
-                      {...field}
-                    />
+                    <Input placeholder="Password" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isSubmittingLoader}>signin</Button>
+            <Button type="submit" disabled={isSubmittingLoader}>
+              signin
+            </Button>
           </form>
         </Form>
       </div>

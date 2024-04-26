@@ -8,6 +8,8 @@ import Link from "next/link";
 function Navbar() {
   const { data: session } = useSession();
   const user = session?.user;
+  console.log(user);
+  
 
   return (
     <nav className="p-4 md:p-6 shadow-md bg-gray-900 text-white">
