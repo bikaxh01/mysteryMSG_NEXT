@@ -8,6 +8,7 @@ export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
 
   const user = await session?.user;
+  
 
   if (!user) {
     return Response.json(
@@ -56,7 +57,7 @@ export async function POST(req: Request) {
 export async function GET(req:Request) {
 
     const session = await getServerSession(authOptions)
-
+   
     const user = await session?.user
     
     //@ts-ignore
@@ -84,9 +85,10 @@ try {
                 { status: 404 }
               );
         }
+        
      return Response.json(
         { success: true, isAccepting: userMessageStatus.isAcceptingMsg },
-        { status: 400 }
+        { status: 200 }
       );
     
 } catch (error) {

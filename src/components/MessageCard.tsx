@@ -38,13 +38,9 @@ function MessageCard({message,onMessageDelete}:Cardprops) {
     onMessageDelete(message.id)
   }
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>Card Content</p>
+    <Card className=" mt-4">
+      <CardContent className=" mt-6 text-xl">
+        <p>{message.content}</p>
       </CardContent>
       <CardFooter>
       <AlertDialog>

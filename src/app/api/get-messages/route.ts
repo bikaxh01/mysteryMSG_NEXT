@@ -9,7 +9,7 @@ export async function GET(res: Response) {
   const user = await session?.user;
   //@ts-ignore
   const id = parseInt(user?.id)
-   console.log(user);
+   
    
 
   if (!user) {
@@ -32,8 +32,8 @@ export async function GET(res: Response) {
       
     if(isExists.length == 0){
         return Response.json(
-            { success: false, message: "No Message", data:null },
-            { status: 200 }
+            { success: false, message: "No Message", data:"No Messages" },
+            { status: 400 }
           );
     }
 
@@ -44,7 +44,6 @@ export async function GET(res: Response) {
       
       
   } catch (error:any) {
-    console.log(error.message);
     
     return Response.json(
       { success: false, message: "Error while getting messsages" },

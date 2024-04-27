@@ -9,11 +9,10 @@ import ModeToggle from "./DarkMode";
 function Navbar() {
   const { data: session } = useSession();
   const user = session?.user;
-  console.log(user);
 
   return (
     <nav>
-      <div className="p-4 md:p-6 border-b-2  shadow-md">
+      <div className="p-4 md:p-6   shadow-md">
         <div className="container mx-auto flex  justify-between flex-col md:flex-row gap-12 items-center">
           <a href="#" className="text-xl font-bold mb-4 md:mb-0">
             Mistry Message
