@@ -1,10 +1,11 @@
 import { PrismaClient } from "@prisma/client";
+import { error } from "console";
 
 
 const prisma = new PrismaClient()
 
 export async function POST(req:Request) {
-
+ 
     const {username,content} = await req.json()
 
     try {
@@ -37,29 +38,20 @@ export async function POST(req:Request) {
         },
       });
 
-
-      const updatedUser = await prisma.usertable.update({
-        where: {
-          id: User.id,
-        },
-        data: {
-          messages: {
-            connect: {
-              id: newMessage.id,
-            },
-          },
-        },
-        include: {
-          messages: true, 
-        },
-      });
-      console.log(User);
+  
+        
+      if(!newMessage){
+        return Response.json({
+          success:false,
+          message:"Error while sending  messages"
+      },{status:400}) 
+      }
 
       
       return Response.json({
         success:true,
         message:"Message sent"
-    },{status:404})
+    },{status:200})
 
     } catch (error) {
         return Response.json({
