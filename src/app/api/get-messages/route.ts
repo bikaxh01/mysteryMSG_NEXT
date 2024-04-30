@@ -4,13 +4,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET(res: Response) {
+export async function GET(req: Request) {
   const session = await getServerSession(authOptions);
   const user = await session?.user;
   //@ts-ignore
-  const id = parseInt(user?.id)
-   
-   
+  const id = parseInt(user?.id);
 
   if (!user) {
     return Response.json(
@@ -20,36 +18,28 @@ export async function GET(res: Response) {
   }
 
   try {
-
     // geting messages
     const isExists = await prisma.message.findMany({
-        where:{
-          userId:id
-        }
-      });
-    
-      
-      
-    if(isExists.length == 0){
-        return Response.json(
-            { success: false, message: "No Message", data:"No Messages" },
-            { status: 400 }
-          );
+      where: {
+        userId: id,
+      },
+    });
+
+    if (isExists.length == 0) {
+      return Response.json(
+        { success: false, message: "No Message", data: "No Messages" },
+        { status: 400 }
+      );
     }
 
-      return Response.json(
-        { success: true, message: "success", data:isExists},
-        { status: 200 }
-      );
-      
-      
-  } catch (error:any) {
-    
+    return Response.json(
+      { success: true, message: "success", data: isExists },
+      { status: 200 }
+    );
+  } catch (error: any) {
     return Response.json(
       { success: false, message: "Error while getting messsages" },
       { status: 400 }
     );
   }
 }
-
-
