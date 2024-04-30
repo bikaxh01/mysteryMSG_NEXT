@@ -26,7 +26,6 @@ function page() {
   const { toast } = useToast();
 
   const form = useForm({
-    
     defaultValues: {
       messageContent: "",
     },
@@ -35,8 +34,6 @@ function page() {
   const onSubmit = async ({messageContent}:any) => {
     try {
       setLoading(true)
-      console.log("CLicked");
-      
       const response = await axios.post("/api/send-message", {
         username: params.username,
         content: messageContent,
@@ -88,6 +85,9 @@ function page() {
         <Button type="submit" disabled={loading}>Submit</Button>
       </form>
     </Form>
+
+   
+
     </div>
   );
 }
