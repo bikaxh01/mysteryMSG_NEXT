@@ -9,7 +9,10 @@ export const config = {
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
   const url = request.nextUrl;
-
+   console.log(`Token ${token?.email}`);
+   console.log(`URL : ${url}`);
+   
+   
   // Redirect to dashboard if the user is already authenticated
   // and trying to access sign-in, sign-up, or home page
   if (
@@ -19,10 +22,13 @@ export async function middleware(request: NextRequest) {
       url.pathname.startsWith('/verify') ||
       url.pathname === '/')
   ) {
+    
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
   if (!token && url.pathname.startsWith('/dashboard')) {
+   
+    
     return NextResponse.redirect(new URL('/sign-in', request.url));
   }
 

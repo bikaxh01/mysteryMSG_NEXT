@@ -57,6 +57,9 @@ function SignInForm() {
     }
 
     if (response?.url) {
+      
+      console.log(`response?.url ${response?.url}`);
+      
       router.replace("/dashboard");
     }
     setIsSubmmitingLoader(false);
