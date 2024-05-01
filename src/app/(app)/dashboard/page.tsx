@@ -107,11 +107,13 @@ function page() {
     }
   };
   const user = session?.user;
-  console.log(messages);
   
   const profileUrl = `https://mystery-msg-next.vercel.app/u/${user?.username}`;
 
   const copyToClipboard = () => {
+    toast({
+      title:"Copied"
+    })
     navigator.clipboard.writeText(profileUrl);
   };
 
