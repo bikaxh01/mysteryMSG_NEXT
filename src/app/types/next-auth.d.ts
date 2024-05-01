@@ -9,6 +9,7 @@ declare module 'next-auth' {
       email?: string;
       isVerify?:boolean
       isAcceptingMsg?: boolean;
+      
     } & DefaultSession["user"];
   }
   
@@ -17,6 +18,7 @@ declare module 'next-auth' {
     username?: string;
     email?: string;
     isVerify?: boolean;
+    error:string;
     isAcceptingMsg?: boolean;
   }
 }
