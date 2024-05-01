@@ -109,7 +109,7 @@ function page() {
   const user = session?.user;
   console.log(messages);
   
-  const profileUrl = `http://localhost:3000/u/${user?.username}`;
+  const profileUrl = `https://mystery-msg-next.vercel.app/u/${user?.username}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl);

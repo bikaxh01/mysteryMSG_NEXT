@@ -1,8 +1,6 @@
 "use client";
 
 import { useToast } from "@/components/ui/use-toast";
-import { messageValidation } from "@/validationSchema/message.valid";
-import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
