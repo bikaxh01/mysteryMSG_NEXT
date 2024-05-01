@@ -108,7 +108,7 @@ function page() {
   };
   const user = session?.user;
   
-  const profileUrl = `https://mystery-msg-next.vercel.app/u/${user?.username}`;
+  const profileUrl = `https://mistrymsg.bikash.cloud/u/${user?.username}`;
 
   const copyToClipboard = () => {
     toast({
