@@ -6,7 +6,7 @@ First, run the development server:
 
 ```bas
 
-npm run de
+npm run deh
 # or
 yarn dev
 # or
